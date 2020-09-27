@@ -1,2 +1,4 @@
-./booklets
-./archive
+.gitignore
+booklets/
+archive/
+

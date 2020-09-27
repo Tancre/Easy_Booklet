@@ -15,7 +15,7 @@ def split_add_blank(path):
 
     add_blank(path, pages, fname)
     pdf_splitter(path, pdf, pages, fname)
-    rename(total_pages)
+    rename(total_pages)                                 # change to exact number of pages if not working
 
     shutil.rmtree('./temp')
 
@@ -85,7 +85,6 @@ def rename(total_pages):
                     print(str(pageCorrected) + " is " + str(counter).zfill(2))
                     counter = counter - 3
 
-
 if __name__ == '__main__':
     path = sys.argv[1]
-    split_add_blank(path)
+    split_add_blank('./archive/' + path)
