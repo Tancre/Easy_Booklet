@@ -3,7 +3,7 @@
 import sys, shutil, glob, time
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
-def merger(output_path, input_paths):
+def merger(input_paths, output_path):
 
     pdf_writer = PdfFileWriter()
 
@@ -21,4 +21,4 @@ def merger(output_path, input_paths):
 if __name__ == '__main__':
     paths = glob.glob('./new/*.pdf')
     paths.sort()
-    merger('./booklets/' + sys.argv[1], paths)
+    merger(paths, './booklets/' + sys.argv[1])
