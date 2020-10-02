@@ -1,28 +1,36 @@
 # Toolkit to make booklets
 To begin make sure you have installed: 
+
 	makefile, python3, PyPDF2, imageMagick
 
 Clone the repository (or download it):
+
 	git clone 
 
 List usage:
+
 	make help
 
 Initialize folders:
+
 	make init
 
 Now you can move your pdfs into the archive directory!
 
 Generate your booklet into the /booklets folder (remember that the 'nameFile' must be without extension .pdf): 
+
 	make file='nameFile' booklet
 
 Generate your booklet into the /booklets folder from a double-pages pdf (remember that the 'nameFile' must be without extension .pdf): 
+
 	make file='nameFile' single_pages_booklet
 
 You can also generate a single-pages pdf into the /archive folder from double-pages pdf (remember that the 'nameFile' must be without extension .pdf): 
+
 	make file='nameFile' single_pages
 
 If you get stuck, remember to clean the temporary folders before to start again:
+
 	make clean
 
 
