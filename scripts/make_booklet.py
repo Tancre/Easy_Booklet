@@ -8,16 +8,17 @@ def add_blank(path, pages):
     path_blank_page = './white_page.pdf'
 
     blank_page = PdfFileReader(path_blank_page)
-
+    os.mkdir('temp')
     if (pages%4) == 0:
         print('Pages are already a multiple of 4')
+       #os.mkdir('temp')
 
         return pages
 
     else:
         print('Adding missing pages...')
 
-        os.mkdir('temp')
+        #os.mkdir('temp')
         while True:
             missing = pages%4
             pages = pages + 1
