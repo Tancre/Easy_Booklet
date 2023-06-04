@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 import sys, os, shutil, glob, time
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 
 def add_blank(path, pages):
     path_blank_page = './white_page.pdf'
 
-    blank_page = PdfFileReader(path_blank_page)
+    blank_page = PdfReader(path_blank_page)
     os.mkdir('temp')
     if (pages%4) == 0:
         print('Pages are already a multiple of 4')
@@ -23,8 +23,8 @@ def add_blank(path, pages):
             missing = pages%4
             pages = pages + 1
             
-            pdf_writer = PdfFileWriter()
-            pdf_writer.addPage(blank_page.getPage(0))
+            pdf_writer = PdfWriter()
+            pdf_writer.add_page(blank_page.pages[0])
             output_filename = './temp/{}.pdf'.format(pages)
 
             with open(output_filename, 'wb') as out:
@@ -42,11 +42,11 @@ def add_blank(path, pages):
 def pdf_splitter(path, pages):
     print('Splitting pdf...')
 
-    pages = pdf.getNumPages()
+    pages = len(pdf.pages)
 
     for page in range(pages):
-        pdf_writer = PdfFileWriter()
-        pdf_writer.addPage(pdf.getPage(page))
+        pdf_writer = PdfWriter()
+        pdf_writer.add_page(pdf.pages[page])
         output_filename = './temp/{}.pdf'.format(page+1)
         
         with open(output_filename, 'wb') as out:
@@ -108,12 +108,12 @@ def merger(output_path):
     paths = glob.glob('./new/*.pdf')
     paths.sort()
 
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfWriter()
 
     for path in paths:
-        pdf_reader = PdfFileReader(path)
-        for page in range(pdf_reader.getNumPages()):
-            pdf_writer.addPage(pdf_reader.getPage(page))
+        pdf_reader = PdfReader(path)
+        for page in range(len(pdf_reader.pages)):
+            pdf_writer.add_page(pdf_reader.pages[page])
 
     with open(output_path, 'wb') as fh:
         pdf_writer.write(fh)
@@ -131,8 +131,8 @@ if __name__ == '__main__':
 
     fname = os.path.splitext(os.path.basename(input_path))[0]
 
-    pdf = PdfFileReader(input_path)
-    pages = pdf.getNumPages()
+    pdf = PdfReader(input_path)
+    pages = len(pdf.pages)
     
     print('Starting pages: ' + str(pages))
 
